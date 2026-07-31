@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Driver CDL & DOT Compliance Onboarding Request</title>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    /* Custom transition for steps */
+    .step-content {
+      transition: all 0.3s ease-in-out;
+    }
+
+    /* Hide scrollbars but keep functionality */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col font-sans antialiased">
+
+  <!-- Header Banner -->
+  <header class="border-b border-slate-800 bg-slate-950/50 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div>
+          <h1 class="text-lg font-bold tracking-tight text-white">Logistics Onboarding</h1>
+          <p class="text-xs text-indigo-400 font-semibold tracking-wider uppercase">Compliance Portal</p>
+        </div>
+      </div>
+      <div class="flex items-center space-x-2 text-xs text-slate-400 bg-slate-800 px-3 py-1.5 rounded-full">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span>Secure DOT Link</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow flex items-center justify-center p-4 md:p-8">
+    <div class="w-full max-w-2xl bg-slate-950 border border-slate-800 rounded-2xl shadow-2xl overflow-hidden">
+
+      <!-- Progress Bar Tracker -->
+      <div class="bg-slate-900/80 px-6 py-4 border-b border-slate-800">
+        <div class="flex justify-between items-center mb-4">
+          <span class="text-xs font-semibold text-indigo-400 uppercase tracking-widest" id="step-badge">Step 1 of
+            4</span>
+          <span class="text-xs font-medium text-slate-400" id="step-title">Personal Details</span>
+        </div>
+        <!-- Progress Bar -->
+        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+          <div id="progress-bar"
+            class="bg-gradient-to-r from-indigo-500 to-emerald-500 h-full rounded-full transition-all duration-300 w-1/4">
+          </div>
+        </div>
+        <!-- Steps Indicators -->
+        <div class="grid grid-cols-4 gap-2 mt-4 text-center text-xs">
+          <div id="step-indicator-1"
+            class="font-medium text-indigo-400 border-t-2 border-indigo-500 pt-2 transition-all">Personal</div>
+          <div id="step-indicator-2" class="font-medium text-slate-500 border-t-2 border-slate-800 pt-2 transition-all">
+            CDL Info</div>
+          <div id="step-indicator-3" class="font-medium text-slate-500 border-t-2 border-slate-800 pt-2 transition-all">
+            Documents</div>
+          <div id="step-indicator-4" class="font-medium text-slate-500 border-t-2 border-slate-800 pt-2 transition-all">
+            Signatures</div>
+        </div>
+      </div>
+
+      <!-- Main Form -->
+      <form id="onboarding-form" class="p-6 md:p-8 space-y-6" onsubmit="event.preventDefault();">
+
+        <!-- STEP 1: Personal Info -->
+        <div id="step-content-1" class="step-content space-y-5">
+          <div class="space-y-1">
+            <h2 class="text-xl font-bold text-white">Let's start with the basics</h2>
+            <p class="text-sm text-slate-400">Please provide your legal personal information as listed on your
+              commercial driver's license.</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">First Name</label>
+              <input type="text" id="first_name" name="first_name" required placeholder="John"
+                class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all">
+              <p class="text-xs text-rose-500 mt-1 hidden" id="first-name-error">First name is required.</p>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Last Name</label>
+              <input type="text" id="last_name" name="last_name" required placeholder="Doe"
+                class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all">
+              <p class="text-xs text-rose-500 mt-1 hidden" id="last-name-error">Last name is required.</p>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Email
+              Address</label>
+            <input type="email" id="email" name="email" required placeholder="driver@apexlogistics.com"
+              class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all">
+            <p class="text-xs text-rose-500 mt-1 hidden" id="email-error">Please enter a valid email address.</p>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Mobile Phone
+              Number</label>
+            <input type="tel" id="phone" name="phone" required placeholder="(555) 000-0000"
+              class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all">
+            <p class="text-xs text-rose-500 mt-1 hidden" id="phone-error">Please enter a valid phone number.</p>
+          </div>
+        </div>
+
+        <!-- STEP 2: CDL & Compliance Details -->
+        <div id="step-content-2" class="step-content hidden space-y-5">
+          <div class="space-y-1">
+            <h2 class="text-xl font-bold text-white">License & Certification Details</h2>
+            <p class="text-sm text-slate-400">Federal regulations require active CDL validation prior to driver
+              dispatching.</p>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">CDL Class</label>
+            <select id="license_class" name="license_class" required
+              class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all">
+              <option value="" disabled selected>Select CDL Class Type</option>
+              <option value="class_a">Class A CDL (Tractor-Trailer)</option>
+              <option value="class_b">Class B CDL (Straight Truck)</option>
+              <option value="class_c">Class C (Commercial / Non-CDL)</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Commercial Driver's
+              License (CDL) #</label>
+            <input type="text" id="cdl_number" name="cdl_number" required placeholder="AB123456"
+              class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all">
+            <p class="text-xs text-rose-500 mt-1 hidden" id="cdl-number-error">CDL Number is required.</p>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">CDL Expiration
+              Date</label>
+            <input type="date" id="cdl_expiration" name="cdl_expiration" required
+              class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all">
+            <!-- CDL Warning alert -->
+            <div id="cdl-warning-alert"
+              class="hidden mt-3 bg-amber-500/10 border border-amber-500/30 text-amber-400 p-3 rounded-lg flex items-start space-x-2">
+              <i data-lucide="alert-triangle" class="w-5 h-5 shrink-0 mt-0.5"></i>
+              <span class="text-xs">Warning: Your CDL expires in less than 90 days. Additional safety reviews will be
+                triggered.</span>
+            </div>
+            <p class="text-xs text-rose-500 mt-1 hidden" id="cdl-expiration-error">Please select a valid expiration
+              date.</p>
+          </div>
+        </div>
+
+        <!-- STEP 3: Compliance Document Uploads -->
+        <div id="step-content-3" class="step-content hidden space-y-5">
+          <div class="space-y-1">
+            <h2 class="text-xl font-bold text-white">Upload Compliance Documents</h2>
+            <p class="text-sm text-slate-400">Provide clear scans or high-quality photos of your valid documents.</p>
+          </div>
+
+          <!-- CDL Upload -->
+          <div class="space-y-2">
+            <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider">Front of Commercial
+              Driver's License (CDL)</label>
+            <div
+              class="border-2 border-dashed border-slate-700 hover:border-indigo-500 bg-slate-900/50 hover:bg-slate-900 rounded-xl p-6 transition-all flex flex-col items-center justify-center cursor-pointer relative"
+              id="cdl-dropzone">
+              <input type="file" id="cdl_scan" accept=".jpg,.jpeg,.png,.pdf"
+                class="absolute inset-0 opacity-0 cursor-pointer">
+              <i data-lucide="upload-cloud" class="w-10 h-10 text-slate-500 mb-2" id="cdl-upload-icon"></i>
+              <span class="text-sm font-semibold text-slate-300" id="cdl-upload-text">Select or drop file here</span>
+              <span class="text-xs text-slate-500 mt-1">PDF, JPG, or PNG up to 10MB</span>
+            </div>
+            <p class="text-xs text-rose-500 mt-1 hidden" id="cdl-scan-error">Please upload a valid front-scan of your
+              CDL.</p>
+          </div>
+
+          <!-- Conditional Medical Certificate Upload (Shown for Class A & B only) -->
+          <div id="medical-cert-container" class="space-y-2 hidden">
+            <div class="flex items-center justify-between">
+              <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider">Medical Examiner's
+                Certificate (DOT Form MCSA-5876)</label>
+              <span
+                class="bg-indigo-950 text-indigo-400 text-[10px] font-bold px-2 py-0.5 rounded border border-indigo-800">Class
+                A/B Required</span>
+            </div>
+            <div
+              class="border-2 border-dashed border-slate-700 hover:border-indigo-500 bg-slate-900/50 hover:bg-slate-900 rounded-xl p-6 transition-all flex flex-col items-center justify-center cursor-pointer relative"
+              id="med-dropzone">
+              <input type="file" id="med_cert" accept=".jpg,.jpeg,.png,.pdf"
+                class="absolute inset-0 opacity-0 cursor-pointer">
+              <i data-lucide="upload-cloud" class="w-10 h-10 text-slate-500 mb-2" id="med-upload-icon"></i>
+              <span class="text-sm font-semibold text-slate-300" id="med-upload-text">Select or drop file here</span>
+              <span class="text-xs text-slate-500 mt-1">PDF, JPG, or PNG up to 10MB</span>
+            </div>
+            <p class="text-xs text-rose-500 mt-1 hidden" id="med-cert-error">Please upload a valid Medical Examiner
+              Certificate.</p>
+          </div>
+        </div>
+
+        <!-- STEP 4: Consent & Disclosures -->
+        <div id="step-content-4" class="step-content hidden space-y-6">
+          <div class="space-y-1">
+            <h2 class="text-xl font-bold text-white">DOT Consents & E-Signature</h2>
+            <p class="text-sm text-slate-400">Review terms and sign below to consent to regulatory driver checks.</p>
+          </div>
+
+          <div class="space-y-4">
+            <label
+              class="flex items-start space-x-3 cursor-pointer p-3 bg-slate-900 rounded-lg hover:bg-slate-800/80 transition-all border border-slate-800">
+              <input type="checkbox" id="mvr_consent" required
+                class="mt-1 rounded text-indigo-600 focus:ring-indigo-500 border-slate-700 bg-slate-850 w-4 h-4">
+              <span class="text-xs text-slate-300 leading-normal">I authorize Apex Logistics Group to conduct a Motor
+                Vehicle Record (MVR) screening and monitor my driving history for safety and DOT regulatory
+                compliance.</span>
+            </label>
+            <label
+              class="flex items-start space-x-3 cursor-pointer p-3 bg-slate-900 rounded-lg hover:bg-slate-800/80 transition-all border border-slate-800">
+              <input type="checkbox" id="drug_consent" required
+                class="mt-1 rounded text-indigo-600 focus:ring-indigo-500 border-slate-700 bg-slate-850 w-4 h-4">
+              <span class="text-xs text-slate-300 leading-normal">I consent to mandatory DOT pre-employment drug testing
+                and random testing compliance requirements.</span>
+            </label>
+          </div>
+
+          <!-- Interactive Signature Simulation -->
+          <div class="space-y-2">
+            <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider">Full Legal Name
+              Signature</label>
+            <input type="text" id="signature_name" name="signature_name" required
+              placeholder="Type your full legal name to sign"
+              class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all font-serif italic text-lg tracking-wide">
+            <p class="text-xs text-slate-500">By typing your name above, you acknowledge that you are signing this
+              request digitally.</p>
+            <p class="text-xs text-rose-500 mt-1 hidden" id="signature-error">Please type your name to sign the
+              document.</p>
+          </div>
+        </div>
+
+        <!-- Submission Success State (Mock) -->
+        <div id="success-state" class="hidden text-center py-10 space-y-6">
+          <div
+            class="mx-auto w-16 h-16 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-full flex items-center justify-center animate-bounce">
+            <i data-lucide="check-circle" class="w-10 h-10"></i>
+          </div>
+          <div class="space-y-2">
+            <h2 class="text-2xl font-bold text-white">Application Submitted!</h2>
+            <p class="text-sm text-slate-400 max-w-md mx-auto">Thank you. Your CDL and DOT compliance documents are
+              being processed. Standard validation takes under 48 hours.</p>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl max-w-md mx-auto text-left space-y-3">
+            <div class="text-xs text-indigo-400 font-bold uppercase tracking-wider">Workflow Tracker (Real-time Status)
+            </div>
+            <div class="flex items-center space-x-3 text-xs">
+              <div class="w-2.5 h-2.5 rounded-full bg-emerald-500"></div>
+              <span class="text-slate-300">Intake Form validated & saved</span>
+            </div>
+            <div class="flex items-center space-x-3 text-xs">
+              <div class="w-2.5 h-2.5 rounded-full bg-indigo-500 animate-pulse"></div>
+              <span class="text-slate-300">Triggering Background Check / MVR...</span>
+            </div>
+            <div class="flex items-center space-x-3 text-xs opacity-50">
+              <div class="w-2.5 h-2.5 rounded-full bg-slate-700"></div>
+              <span class="text-slate-500">Fleet truck assignment routing</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div id="nav-buttons" class="flex justify-between items-center pt-4 border-t border-slate-800">
+          <button type="button" id="prev-btn"
+            class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium rounded-lg text-sm transition-all invisible flex items-center space-x-2">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            <span>Back</span>
+          </button>
+          <button type="button" id="next-btn"
+            class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-medium rounded-lg text-sm transition-all flex items-center space-x-2">
+            <span>Continue</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </main>
+
+  <footer class="border-t border-slate-800 bg-slate-950 py-4 text-center text-xs text-slate-500">
+    <p>© 2026 Apex Logistics Group. All rights reserved. Encrypted under AES-256 standard.</p>
+  </footer>
+
+  <script>
+    // Initialize icons
+    lucide.createIcons();
+
+    // Elements
+    const stepBadge = document.getElementById('step-badge');
+    const stepTitle = document.getElementById('step-title');
+    const progressBar = document.getElementById('progress-bar');
+    const nextBtn = document.getElementById('next-btn');
+    const prevBtn = document.getElementById('prev-btn');
+    const navButtons = document.getElementById('nav-buttons');
+    const onboardingForm = document.getElementById('onboarding-form');
+    const successState = document.getElementById('success-state');
+
+    // Steps configuration
+    const stepTitles = [
+      "Personal Details",
+      "CDL Info",
+      "Compliance Uploads",
+      "Consents & Signature"
+    ];
+
+    let currentStep = 1;
+    const totalSteps = 4;
+
+    // Field-level events
+    const licenseClass = document.getElementById('license_class');
+    const medicalCertContainer = document.getElementById('medical-cert-container');
+    const cdlExpiration = document.getElementById('cdl_expiration');
+    const cdlWarningAlert = document.getElementById('cdl-warning-alert');
+
+    // Class conditional logic
+    licenseClass.addEventListener('change', (e) => {
+      const val = e.target.value;
+      if (val === 'class_a' || val === 'class_b') {
+        medicalCertContainer.classList.remove('hidden');
+        document.getElementById('med_cert').required = true;
+      } else {
+        medicalCertContainer.classList.add('hidden');
+        document.getElementById('med_cert').required = false;
+      }
+    });
+
+    // Expiration warning check
+    cdlExpiration.addEventListener('change', (e) => {
+      const expDate = new Date(e.target.value);
+      const today = new Date();
+      const diffTime = expDate - today;
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+      if (diffDays > 0 && diffDays < 90) {
+        cdlWarningAlert.classList.remove('hidden');
+      } else {
+        cdlWarningAlert.classList.add('hidden');
+      }
+    });
+
+    // Handle File upload text indicators
+    function setupFileUpload(inputId, textId, iconId, dropzoneId) {
+      const fileInput = document.getElementById(inputId);
+      const textElem = document.getElementById(textId);
+      const iconElem = document.getElementById(iconId);
+      const dropzone = document.getElementById(dropzoneId);
+
+      fileInput.addEventListener('change', (e) => {
+        if (fileInput.files.length > 0) {
+          const file = fileInput.files[0];
+          textElem.textContent = file.name;
+          textElem.classList.remove('text-slate-300');
+          textElem.classList.add('text-indigo-400');
+          iconElem.classList.remove('text-slate-500');
+          iconElem.classList.add('text-indigo-500');
+          dropzone.classList.add('border-indigo-500', 'bg-indigo-950/20');
+        }
+      });
+    }
+    setupFileUpload('cdl_scan', 'cdl-upload-text', 'cdl-upload-icon', 'cdl-dropzone');
+    setupFileUpload('med_cert', 'med-upload-text', 'med-upload-icon', 'med-dropzone');
+
+    // Validation checks per step
+    function validateStep(step) {
+      let isValid = true;
+
+      if (step === 1) {
+        const fName = document.getElementById('first_name');
+        const lName = document.getElementById('last_name');
+        const email = document.getElementById('email');
+        const phone = document.getElementById('phone');
+
+        if (!fName.value.trim()) {
+          document.getElementById('first-name-error').classList.remove('hidden');
+          isValid = false;
+        } else {
+          document.getElementById('first-name-error').classList.add('hidden');
+        }
+
+        if (!lName.value.trim()) {
+          document.getElementById('last-name-error').classList.remove('hidden');
+          isValid = false;
+        } else {
+          document.getElementById('last-name-error').classList.add('hidden');
+        }
+
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email.value.trim())) {
+          document.getElementById('email-error').classList.remove('hidden');
+          isValid = false;
+        } else {
+          document.getElementById('email-error').classList.add('hidden');
+        }
+
+        if (!phone.value.trim()) {
+          document.getElementById('phone-error').classList.remove('hidden');
+          isValid = false;
+        } else {
+          document.getElementById('phone-error').classList.add('hidden');
+        }
+      }
+
+      if (step === 2) {
+        const licenseType = document.getElementById('license_class');
+        const cdlNum = document.getElementById('cdl_number');
+        const cdlExp = document.getElementById('cdl_expiration');
+
+        if (!licenseType.value) {
+          licenseType.classList.add('border-rose-500');
+          isValid = false;
+        } else {
+          licenseType.classList.remove('border-rose-500');
+        }
+
+        if (!cdlNum.value.trim()) {
+          document.getElementById('cdl-number-error').classList.remove('hidden');
+          isValid = false;
+        } else {
+          document.getElementById('cdl-number-error').classList.add('hidden');
+        }
+
+        if (!cdlExp.value) {
+          document.getElementById('cdl-expiration-error').classList.remove('hidden');
+          isValid = false;
+        } else {
+          document.getElementById('cdl-expiration-error').classList.add('hidden');
+        }
+      }
+
+      if (step === 3) {
+        const cdlScan = document.getElementById('cdl_scan');
+        const medCert = document.getElementById('med_cert');
+        const isMedRequired = (licenseClass.value === 'class_a' || licenseClass.value === 'class_b');
+
+        if (cdlScan.files.length === 0) {
+          document.getElementById('cdl-scan-error').classList.remove('hidden');
+          isValid = false;
+        } else {
+          document.getElementById('cdl-scan-error').classList.add('hidden');
+        }
+
+        if (isMedRequired && medCert.files.length === 0) {
+          document.getElementById('med-cert-error').classList.remove('hidden');
+          isValid = false;
+        } else {
+          document.getElementById('med-cert-error').classList.add('hidden');
+        }
+      }
+
+      if (step === 4) {
+        const mvrConsent = document.getElementById('mvr_consent');
+        const drugConsent = document.getElementById('drug_consent');
+        const sig = document.getElementById('signature_name');
+
+        if (!mvrConsent.checked) isValid = false;
+        if (!drugConsent.checked) isValid = false;
+        if (!sig.value.trim()) {
+          document.getElementById('signature-error').classList.remove('hidden');
+          isValid = false;
+        } else {
+          document.getElementById('signature-error').classList.add('hidden');
+        }
+      }
+
+      return isValid;
+    }
+
+    // Navigation events
+    nextBtn.addEventListener('click', () => {
+      if (!validateStep(currentStep)) return;
+
+      if (currentStep < totalSteps) {
+        document.getElementById(`step-content-${currentStep}`).classList.add('hidden');
+        currentStep++;
+        document.getElementById(`step-content-${currentStep}`).classList.remove('hidden');
+        updateUI();
+      } else {
+        // Form submitted
+        document.getElementById(`step-content-${currentStep}`).classList.add('hidden');
+        successState.classList.remove('hidden');
+        navButtons.classList.add('hidden');
+        stepBadge.textContent = "Done";
+        stepTitle.textContent = "Submission Confirmed";
+        progressBar.style.width = '100%';
+        progressBar.classList.remove('from-indigo-500', 'to-emerald-500');
+        progressBar.classList.add('bg-emerald-500');
+      }
+    });
+
+    prevBtn.addEventListener('click', () => {
+      if (currentStep > 1) {
+        document.getElementById(`step-content-${currentStep}`).classList.add('hidden');
+        currentStep--;
+        document.getElementById(`step-content-${currentStep}`).classList.remove('hidden');
+        updateUI();
+      }
+    });
+
+    // Update form navigation UI
+    function updateUI() {
+      // Step title and progress bars
+      stepBadge.textContent = `Step ${currentStep} of ${totalSteps}`;
+      stepTitle.textContent = stepTitles[currentStep - 1];
+      progressBar.style.width = `${(currentStep / totalSteps) * 100}%`;
+
+      // Back Button visibility
+      if (currentStep === 1) {
+        prevBtn.classList.add('invisible');
+      } else {
+        prevBtn.classList.remove('invisible');
+      }
+
+      // Continue/Submit Button text
+      if (currentStep === totalSteps) {
+        nextBtn.innerHTML = `<span>Submit Request</span> <i data-lucide="check" class="w-4 h-4"></i>`;
+      } else {
+        nextBtn.innerHTML = `<span>Continue</span> <i data-lucide="arrow-right" class="w-4 h-4"></i>`;
+      }
+
+      // Re-draw step indicators
+      for (let i = 1; i <= totalSteps; i++) {
+        const ind = document.getElementById(`step-indicator-${i}`);
+        if (i === currentStep) {
+          ind.classList.remove('text-slate-500', 'border-slate-800');
+          ind.classList.add('text-indigo-400', 'border-indigo-500');
+        } else if (i < currentStep) {
+          ind.classList.remove('text-slate-500', 'border-slate-800', 'text-indigo-400', 'border-indigo-500');
+          ind.classList.add('text-emerald-400', 'border-emerald-500');
+        } else {
+          ind.classList.remove('text-indigo-400', 'border-indigo-500', 'text-emerald-400', 'border-emerald-500');
+          ind.classList.add('text-slate-500', 'border-slate-800');
+        }
+      }
+
+      // Refresh icons in buttons
+      lucide.createIcons();
+    }
+
+  </script>
+</body>
+
+</html>
